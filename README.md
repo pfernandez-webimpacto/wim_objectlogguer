@@ -1,1 +1,1 @@
-wim_objectlogguer
+win_objectlogger
