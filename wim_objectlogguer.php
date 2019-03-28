@@ -35,11 +35,8 @@
        // return parent::install();
 
        return parent::install() &&
-       $this->registerHook('actionObjectAddBefore') &&
-       $this->registerHook('actionObjectAddBefore') &&
-       $this->registerHook('actionObjectDeleteBefore') &&
+       $this->registerHook('actionObjectAddAfter') &&
        $this->registerHook('actionObjectDeleteAfter') &&
-       $this->registerHook('actionObjectUpdateBefore') &&
        $this->registerHook('actionObjectUpdateAfter');
     }
 
@@ -53,9 +50,9 @@
       $anadir->object_type = get_class($params['object']);
       $anadir->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " update";
       $anadir->date_add = date("Y-m-d H:i:s");
-
+      if(get_class($params['object']) != "ObjectLogger"){
       $anadir->add();
-
+      }
     }
 
 
@@ -68,9 +65,9 @@
       $after->object_type = get_class($params['object']);
       $after->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " add";
       $after->date_add = date("Y-m-d H:i:s");
-
+      if(get_class($params['object']) != "ObjectLogger"){
       $after->add();
-
+      } 
     }
 
 
@@ -83,9 +80,9 @@
       $del->object_type = get_class($params['object']);
       $del->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " delete";
       $del->date_add = date("Y-m-d H:i:s");
-
+      if(get_class($params['object']) != "ObjectLogger"){
       $del->add();
-
+      }
     }
 
         /*Db::getInstance()->insert('objectlogguer',array(
