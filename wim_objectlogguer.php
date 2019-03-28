@@ -1,4 +1,6 @@
 <?php
+
+  require_once ('ObjectLogger.php');
   if (!defined('_PS_VERSION_'))
     exit;
    
@@ -10,7 +12,7 @@
     $this->name = 'wim_objectlogguer';
     $this->tab = 'front_office_features';
     $this->version = '1.0.0';
-    $this->author = 'Firstname Lastname';
+    $this->author = 'Pablo';
     $this->need_instance = 0;
     $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_); 
     $this->bootstrap = true;
@@ -45,16 +47,58 @@
     }
 
 
-     public function hookActionObjectUpdateBefore($params)
+     public function hookActionObjectUpdateAfter($params)
     {
-        Db::getInstance()->insert('objectlogguer',array(
+
+      $anadir = new ObjectLogger();
+      $anadir->affected_object = $params['object']->id;
+      $anadir->action_type = 'Update';
+      $anadir->object_type = get_class($params['object']);
+      $anadir->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $anadir->date_add = date("Y-m-d H:i:s");
+
+      $anadir->add();
+
+    }
+
+
+    public function hookActionObjectAddAfter($params)
+    {
+
+      $after = new ObjectLogger();
+      $after->affected_object = $params['object']->id;
+      $after->action_type = 'Add';
+      $after->object_type = get_class($params['object']);
+      $after->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $after->date_add = date("Y-m-d H:i:s");
+
+      $after->add();
+
+    }
+
+
+    public function hookActionObjectDeleteAfter($params)
+    {
+
+      $del = new ObjectLogger();
+      $del->affected_object = $params['object']->id;
+      $del->action_type = 'Delete';
+      $del->object_type = get_class($params['object']);
+      $del->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $del->date_add = date("Y-m-d H:i:s");
+
+      $del->add();
+
+    }
+
+        /*Db::getInstance()->insert('objectlogguer',array(
             'affected_object' => $params['object']->id, 
-            'action_type' =>   get_object_vars($params['object']),
+            'action_type' =>   'Update',
             'object_type' =>  get_class($params['object']),
             'message' => "Object ". get_class($params['object']) . " with id " . $params['object']->id . " XXXXX",
             'date_add' => date("Y-m-d H:i:s"),
-        ));
-    }
+        ));*/
+    
 
 
 
