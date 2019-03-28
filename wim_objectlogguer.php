@@ -1,6 +1,6 @@
 <?php
 
-  require_once ('ObjectLogger.php');
+  require_once ('classes/ObjectLogger.php');
   if (!defined('_PS_VERSION_'))
     exit;
    
@@ -24,10 +24,7 @@
  
     $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
  
-    if (!Configuration::get('MYMODULE_NAME')) {      
-      $this->warning = $this->l('No name provided');
 
-    }
 
   }
 
@@ -54,7 +51,7 @@
       $anadir->affected_object = $params['object']->id;
       $anadir->action_type = 'Update';
       $anadir->object_type = get_class($params['object']);
-      $anadir->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $anadir->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " update";
       $anadir->date_add = date("Y-m-d H:i:s");
 
       $anadir->add();
@@ -69,7 +66,7 @@
       $after->affected_object = $params['object']->id;
       $after->action_type = 'Add';
       $after->object_type = get_class($params['object']);
-      $after->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $after->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " add";
       $after->date_add = date("Y-m-d H:i:s");
 
       $after->add();
@@ -84,7 +81,7 @@
       $del->affected_object = $params['object']->id;
       $del->action_type = 'Delete';
       $del->object_type = get_class($params['object']);
-      $del->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id;
+      $del->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " delete";
       $del->date_add = date("Y-m-d H:i:s");
 
       $del->add();
