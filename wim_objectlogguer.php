@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
 * 2007-2017 Pablo
 *
 * NOTICE OF LICENSE
@@ -28,9 +28,8 @@
   if (!defined('_PS_VERSION_'))
     exit;
    
-  class Wim_objectlogguer extends Module
-  {
-
+class Wim_objectlogguer extends Module
+{
     public function __construct()
   {
     $this->name = 'wim_objectlogguer';
@@ -47,11 +46,8 @@
     $this->description = $this->l('Description of my module.');
  
     $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
- 
-
 
   }
-
 
     public function install()
     {    
@@ -108,20 +104,4 @@
       $del->add();
       }
     }
-
-        /*Db::getInstance()->insert('objectlogguer',array(
-            'affected_object' => $params['object']->id, 
-            'action_type' =>   'Update',
-            'object_type' =>  get_class($params['object']),
-            'message' => "Object ". get_class($params['object']) . " with id " . $params['object']->id . " XXXXX",
-            'date_add' => date("Y-m-d H:i:s"),
-        ));*/
-    
-
-
-
-
-
-
-
-  }
+}
