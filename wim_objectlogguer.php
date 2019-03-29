@@ -25,7 +25,7 @@
 */
 
 require_once('classes/ObjectLogger.php');
-if(!defined('_PS_VERSION_'))
+if(!defined('_PS_VERSION_') )
 {
     exit;
 }
@@ -61,7 +61,7 @@ class WimObjectlogguer extends Module
     }
 
 
-     public function hookActionObjectUpdateAfter($params)
+    public function hookActionObjectUpdateAfter($params)
     {
 
           $anadir = new ObjectLogger();
