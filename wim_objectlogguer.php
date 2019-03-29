@@ -24,20 +24,21 @@
 *  International Registered Trademark & Property of Pablo
 */
 
-  require_once ('classes/ObjectLogger.php');
-  if (!defined('_PS_VERSION_'))
+require_once('classes/ObjectLogger.php');
+if(!defined('_PS_VERSION_'))
+{
     exit;
-   
-class Wim_objectlogguer extends Module
+}
+class WimObjectlogguer extends Module
 {
     public function __construct()
-  {
+    {
           $this->name = 'wim_objectlogguer';
           $this->tab = 'front_office_features';
           $this->version = '1.0.0';
           $this->author = 'Pablo';
           $this->need_instance = 0;
-          $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_); 
+          $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
           $this->bootstrap = true;
           
           parent::__construct();
@@ -46,11 +47,10 @@ class Wim_objectlogguer extends Module
           $this->description = $this->l('Description of my module.');
           
           $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-
-  }
+    }
 
     public function install()
-    {    
+    {
           include(dirname(__FILE__).'\sql\install.php');
           // return parent::install();
 
@@ -70,9 +70,9 @@ class Wim_objectlogguer extends Module
           $anadir->object_type = get_class($params['object']);
           $anadir->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " update";
           $anadir->date_add = date("Y-m-d H:i:s");
-          if(get_class($params['object']) != "ObjectLogger"){
-          $anadir->add();
-          }
+        if(get_class($params['object']) != "ObjectLogger") {
+            $anadir->add();
+        }
     }
 
 
@@ -85,9 +85,9 @@ class Wim_objectlogguer extends Module
           $after->object_type = get_class($params['object']);
           $after->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " add";
           $after->date_add = date("Y-m-d H:i:s");
-          if(get_class($params['object']) != "ObjectLogger"){
-          $after->add();
-          } 
+        if(get_class($params['object']) != "ObjectLogger") {
+            $after->add();
+        }
     }
 
 
@@ -100,8 +100,8 @@ class Wim_objectlogguer extends Module
           $del->object_type = get_class($params['object']);
           $del->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " delete";
           $del->date_add = date("Y-m-d H:i:s");
-          if(get_class($params['object']) != "ObjectLogger"){
-          $del->add();
-          }
+        if(get_class($params['object']) != "ObjectLogger") {
+            $del->add();
+        }
     }
 }
